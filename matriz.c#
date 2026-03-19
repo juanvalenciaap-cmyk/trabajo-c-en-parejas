@@ -1,0 +1,95 @@
+using System;
+class matrices
+{
+    const int MAX = 10;
+
+    static void ingresar(int[,] m, int f, int c)
+    {
+        for(int i = 0; i < f; i++)
+        for(int j = 0; j < c; j++)
+        {
+            Console.Write($"  elemento [{i}][{j}]: ");
+            m[i, j] = int.Parse(Console.ReadLine());
+        }
+    }
+
+    static void mostrar(int[,] m, int f, int c)
+    {
+        ConsoleColor[] colores = {
+            ConsoleColor.Cyan, ConsoleColor.Green, ConsoleColor.Yellow,
+            ConsoleColor.Magenta, ConsoleColor.Red
+        };
+        for(int i = 0; i < f; i++)
+        {
+            Console.Write("  [ ");
+            for(int j = 0; j < c; j++)
+            {
+                Console.ForegroundColor = colores[j % colores.Length];
+                Console.Write($"{m[i, j],5}");
+                Console.ResetColor();
+            }
+            Console.WriteLine("  ]");
+        }
+    }
+
+    static void sumar(int[,] a, int[,] b, int[,] r, int f, int c)
+    {
+        for(int i = 0; i < f; i++)
+        for(int j = 0; j < c; j++)
+        {
+            r[i, j] = a[i, j] + b[i, j];
+            Console.Write(r[i, j] + "\t");
+        }
+    }
+
+    static void restar(int[,] a, int[,] b, int[,] r, int f, int c)
+    {
+        for(int i = 0; i < f; i++)
+        for(int j = 0; j < c; j++)
+        {
+            r[i, j] = a[i, j] - b[i, j];
+            Console.Write(r[i, j] + "\t");
+        }
+    }
+
+    static void multiplicar(int[,] a, int[,] b, int[,] r, int f, int c)
+    {
+        for(int i = 0; i < f; i++)
+        for(int j = 0; j < c; j++)
+        {
+            r[i, j] = a[i, j] * b[i, j];
+            Console.Write(r[i, j] + "\t");
+        }
+    }
+
+    static void Main()
+    {
+        int[,] a = new int[MAX, MAX];
+        int[,] b = new int[MAX, MAX];
+        int[,] r = new int[MAX, MAX];
+        int f, c;
+
+        Console.Write("Filas: ");
+        f = int.Parse(Console.ReadLine());
+        Console.Write("Columnas: ");
+        c = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("\n-- Matriz A --");
+        ingresar(a, f, c);
+        Console.WriteLine("\n-- Matriz B --");
+        ingresar(b, f, c);
+
+        Console.WriteLine("\n-- Matriz A --");
+        mostrar(a, f, c);
+        Console.WriteLine("\n-- Matriz B --");
+        mostrar(b, f, c);
+
+        Console.WriteLine("\n-- Suma --");
+        sumar(a, b, r, f, c);
+        Console.WriteLine("\n\n-- Resta --");
+        restar(a, b, r, f, c);
+        Console.WriteLine("\n\n-- Multiplicacion elemento a elemento --");
+        multiplicar(a, b, r, f, c);
+        Console.WriteLine();
+    }
+}
